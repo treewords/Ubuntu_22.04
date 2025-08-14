@@ -1,12 +1,18 @@
-FROM ubuntu:24.04
-LABEL logging.driver="json-file"
-LABEL logging.options.max-size="10m"
-LABEL logging.options.max-file="3"
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update \
- && apt-get install -y --no-install-recommends ca-certificates curl \
- && rm -rf /var/lib/apt/lists/*
-RUN useradd -m -u 1000 app && mkdir -p /app && chown -R app:app /app
-USER app
+# Use official Python base image
+FROM python:3.10-slim
+
+# Set working directory
 WORKDIR /app
-CMD ["bash"]
+
+# Copy requirements and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy your collector script
+COPY bingx_async_collector.py .
+
+# Set UTF-8 encoding (avoid Unicode errors)
+ENV PYTHONIOENCODING=utf-8
+
+# Run the script
+CMD ["python", "bingx_async_collector.py"]
