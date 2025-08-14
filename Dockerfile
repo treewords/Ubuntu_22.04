@@ -1,4 +1,8 @@
+
 FROM ubuntu:24.04
+LABEL logging.driver="json-file"
+LABEL logging.options.max-size="10m"
+LABEL logging.options.max-file="3"
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
  && apt-get install -y --no-install-recommends ca-certificates curl \
