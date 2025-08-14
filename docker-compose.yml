@@ -1,0 +1,12 @@
+services:
+  bingx_collector:
+    build: .
+    container_name: bingx_collector
+    restart: always
+    volumes:
+      - .:/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
