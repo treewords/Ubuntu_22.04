@@ -15,4 +15,4 @@ COPY bingx_async_collector.py .
 ENV PYTHONIOENCODING=utf-8
 
 # Run the script
-CMD ["python", "bingx_async_collector.py"]
+ENTRYPOINT ["python", "bingx_async_collector.py"]
