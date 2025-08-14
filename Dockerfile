@@ -1,4 +1,3 @@
-
 FROM ubuntu:24.04
 LABEL logging.driver="json-file"
 LABEL logging.options.max-size="10m"
